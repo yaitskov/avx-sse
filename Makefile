@@ -23,5 +23,5 @@ count-char-in-file-with-avx-popcnt: count-char-in-file-with-avx-popcnt.c
 	$(CC) -o $@ $<
 
 
-parseint: parseint.c
+parseint.exe: parseint.c
 	$(CC) -o $@ $<
