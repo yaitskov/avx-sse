@@ -1,0 +1,20 @@
+make count-chars-in-file && time ./count-chars-in-file /home/dan/pro/riviera/group_assignment_simulation_data.sorted.csv $'\n'
+make: 'count-chars-in-file' is up to date.
+10517037
+
+real	0m0.400s
+user	0m0.371s
+sys	0m0.028s
+14:57$ make count-chars-in-file-seq && time ./count-chars-in-file-seq /home/dan/pro/riviera/group_assignment_simulation_data.sorted.csv
+make: 'count-chars-in-file-seq' is up to date.
+10517037
+
+real	0m1.020s
+user	0m0.979s
+sys	0m0.041s
+14:57$ time wc -l /home/dan/pro/riviera/group_assignment_simulation_data.sorted.csv
+10517037 /home/dan/pro/riviera/group_assignment_simulation_data.sorted.csv
+
+real	0m0.151s
+user	0m0.101s
+sys	0m0.049
