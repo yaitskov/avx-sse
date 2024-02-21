@@ -50,7 +50,9 @@ int countChars(const char* input, int inputLen, const char* stopChars) {
     input += 32;
     // debug("SSE cycles %03d; input %p\n", sseCycles, input);
     // const int bytesToSkipToNextStopChar = _mm_cmpistri(stop_chars, input_a, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ANY);
-    __m256i bits =  _mm256_popcnt_epi32(_mm256_cmpeq_epi8(input_a, stop_chars));
+    __m256i bbb = _mm256_cmpeq_epi8(input_a, stop_chars);
+    bbb = _mm256_dpbusds_epi32(bbb, bbb, bbb);
+    __m256i bits = _mm256_popcnt_epi32(bbb);
     result256 = _mm256_add_epi32(result256, _mm256_srli_epi32(bits, 3));
 
     // __m256i _mm256_popcnt_epi32
@@ -62,6 +64,7 @@ int countChars(const char* input, int inputLen, const char* stopChars) {
     // int _mm256_movemask_epi8 (__m256i a)
     // __m256i _mm256_set_epi64x (__int64 e3, __int64 e2, __int64 e1, __int64 e0)
     // lzcnt unsigned int _lzcnt_u32 (unsigned int a)
+
   }
   const int avxResult = _mm256_extract_epi32(result256, 0) +
     _mm256_extract_epi32(result256, 1) +
@@ -74,6 +77,7 @@ int countChars(const char* input, int inputLen, const char* stopChars) {
   const int afterCycles = (originInput + inputLen) - input;
   const int tailResult = countCharsSeq(&input, afterCycles, stopChars);
   debug("Bytes in incomplete cycle %03d; Head: %03d; Avx %03d; Tail: %03d\n", afterCycles, headResult, avxResult, tailResult);
+
   return headResult + avxResult + tailResult;
 }
 

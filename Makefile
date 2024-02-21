@@ -16,12 +16,16 @@ count-chars-in-file-seq: count-chars-in-file-seq.c
 	$(CC) -o $@ $<
 
 
-count-char-in-file-with-avx: count-char-in-file-with-avx.c
+count-char-in-file-with-avx.exe: count-char-in-file-with-avx.c
 	$(CC) -o $@ $<
 
-count-char-in-file-with-avx-popcnt: count-char-in-file-with-avx-popcnt.c
-	$(CC) -o $@ $<
+count-char-in-file-with-avx-popcnt.exe: count-char-in-file-with-avx-popcnt.c
+	gcc -march=native  -o3 -o $@ $<
+#	gcc -march=sapphirerapids  -o3 -o $@ $<
 
 
 parseint.exe: parseint.c
 	$(CC) -o $@ $<
+
+clean:
+	rm *.exe

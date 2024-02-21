@@ -17,6 +17,33 @@ void m256_print_epi32(const char* p, __m256i* x) {
          );
 }
 
+/*
+  https://stackoverflow.com/questions/319328/how-to-write-a-while-loop-with-the-c-preprocessor
+
+#define applyConst(r, f, a, c)                  \
+  switch(c) {                                   \
+  case 1: f(a, 1); break;                       \
+  case 2: f(a, 1); break;                       \
+  case 3: f(a, 1); break;                       \
+  case 4: f(a, 1); break;                       \
+  case 5: f(a, 1); break;                       \
+  case 6: f(a, 1); break;                       \
+  case 7: f(a, 1); break;                       \
+  case 8: f(a, 1); break;                       \
+  case 1: f(a, 1); break;                       \
+  case 1: f(a, 1); break;                       \
+  case 1: f(a, 1); break;                       \
+  case 1: f(a, 1); break;                       \
+  }
+
+unsigned int avxParseInt10(const char** input, const int alignOffset) {
+  unsigned int result = 0; // 10 bytes as string in  ; 128 => 16 byte
+  __m256i i = _mm_loadsi128((__m128i*) *input);
+  __mm_srli_si128(i, alignOffset
+}
+
+ */
+
 int main() {
   // __m256i result = _mm256_set_epi64x(0, 0, 0, 0);
   //  __m256i digitKs = _mm256_set_epi32(10_000_000, 1000_000, 100_000, 10_000, 1000, 100, 10, 1);
