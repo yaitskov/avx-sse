@@ -3,6 +3,9 @@ CC=gcc -mavx2 -o3
 add: add.c
 	$(CC) -o add add.c
 
+gather.exe: gather.c
+	$(CC) -o $@ $<
+
 prefix-to-comma: prefix-to-comma.c
 	$(CC) -o $@ $<
 count-chars: count-chars.c
